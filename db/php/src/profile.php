@@ -10,7 +10,7 @@ if(!empty($_POST['username']) && !empty($_POST['apiKey'])) {
     $apiKey = $_POST['apiKey'];
     $result = array();
     if($con) {
-        $sql = "select * from users where username = '".$username."' and apiKey = '".$apiKey."'";
+        $sql = "SELECT * FROM users WHERE username = '".$username."' and apiKey = '".$apiKey."'";
         $res = mysqli_query($con, $sql);
         if(mysqli_num_rows($res) != 0) {
             $row = mysqli_fetch_assoc($res);

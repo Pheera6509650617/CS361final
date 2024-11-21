@@ -10,7 +10,7 @@ if(!empty($_POST['gmail']) && !empty($_POST['username']) && !empty($_POST['passw
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     if($con) {
-        $sql = "insert into users (gmail, username, password) values ('".$gmail."', '".$username."', '".$password."')";
+        $sql = "INSERT INTO users (gmail, username, password) values ('".$gmail."', '".$username."', '".$password."')";
         if(mysqli_query($con, $sql)) {
             echo "success";
         } else echo "REGISTRATION FAIL!!!";

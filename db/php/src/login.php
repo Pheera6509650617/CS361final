@@ -8,21 +8,22 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
     $con = new mysqli($host, $user, $pass, $db);
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $result = array();
     if($con) {
-        $sql = "select * from users where username = '".$username."'";
+        $sql = "SELECT * FROM users WHERE username = '".$username."'";
         $res = mysqli_query($con, $sql);
         if(mysqli_num_rows($res) != 0) {
             $row = mysqli_fetch_assoc($res);
-            if($username = $row['username'] && password_verify($password, $row['password'])) {
+            if($username == $row['username'] && password_verify($password, $row['password'])) {
                 try {
                     $apiKey = bin2hex(random_bytes(23));
                 } catch(Exception $e) {
                     $apiKey = bin2hex(uniqid($username, true));
                 }
-                $sqlUpdate = "update users set apiKey = '".$apiKey."' where username = '".$username."'";
+                $sqlUpdate = "UPDATE users SET apiKey = '".$apiKey."' WHERE username = '".$username."'";
                 if(mysqli_query($con, $sqlUpdate)) {
                     $result = array("status" => "success", "message"=>"Login success", 
-                        "gmail"=>$row['gmail'], "username"=>$row['username'], "apiKey"=>$row['apiKey']);
+                        "gmail"=>$row['gmail'], "username"=>$row['username'], "apiKey"=>$apiKey);
                 } else $result = array("status" => "failed", "message" => "Login failed try again");
             } else $result = array("status" => "failed", "message" => "Username or Password incorrect");
         } else $result = array("status" => "failed", "message" => "Username or Password incorrect");
