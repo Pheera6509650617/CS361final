@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CS361_final</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="confirmP">Confirm Password</string>
+    <string name="gmail">Gmail</string>
+    <string name="login">LOGIN</string>
+    <string name="register">Register</string>
+    <string name="logout">Logout</string>
+</resources>
