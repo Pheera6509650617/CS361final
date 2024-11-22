@@ -58,8 +58,6 @@
             android:inputType="textPassword"
             android:layout_marginTop="8dp"/>
 
-
-
         <TextView
             android:id="@+id/warning2"
             android:layout_width="match_parent"
@@ -78,5 +76,11 @@
             android:textColor="@color/blue"
             android:padding="18dp"
             android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"/>
     </LinearLayout>
 </RelativeLayout>

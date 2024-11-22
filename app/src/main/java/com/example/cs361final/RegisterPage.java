@@ -25,6 +25,7 @@ import java.util.Map;
 public class RegisterPage extends AppCompatActivity {
     private EditText gmailT, unameT, passwordT;
     private TextView warningT;
+    Button registerBTN, loginBTN;
     String gmail, uname, password;
     protected void onCreate(Bundle SaveInstanceState) {
         super.onCreate(SaveInstanceState);
@@ -33,7 +34,15 @@ public class RegisterPage extends AppCompatActivity {
         gmailT = findViewById(R.id.gmailRegister);
         unameT = findViewById(R.id.usernameInput2);
         passwordT = findViewById(R.id.passwordInput2);
-        Button registerBTN = findViewById(R.id.RegisterButton);
+        registerBTN = findViewById(R.id.RegisterButton);
+        loginBTN = findViewById(R.id.loginButton);
+
+        loginBTN.setOnClickListener(view -> {
+            Intent LL = new Intent(RegisterPage.this, MainActivity.class);
+            startActivity(LL);
+            finish();
+        });
+
         registerBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
