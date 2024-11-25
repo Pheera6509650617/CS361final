@@ -1,15 +1,26 @@
 <?php
-$host = 'db';
-    $user = 'MYSQL_USER'; // Username ที่ใช้login mysql
-    $pass = 'MYSQL_PASSWORD';// Password ที่ใช้login mysql
-    $db = 'LoginRegister';// ชื่อ Database
+if(isset($_POST['username']) && !empty($_POST['username'])) {
+    $host = 'db';
+    $user = 'MYSQL_USER';
+    $pass = 'MYSQL_PASSWORD';
+    $db = 'LoginRegister';
 
     $con = new mysqli($host, $user, $pass, $db);
-    if($con) {
-        $sql = "SELECT * FROM users";
-        $result = mysqli_query($con, $sql);
+    $username = $_POST['username'];
+    $result = array();
 
-        while($row = mysqli_fetch_assoc($result)) {
-            echo "<img src='".$row['Image']."' width='200px'>";
-        }
-    }
+    if ($con) {
+        $sql = "SELECT Image FROM users WHERE username = '".$username."'";
+        $query = mysqli_query($con, $sql);
+
+        if ($query) {
+            $row = mysqli_fetch_assoc($query);
+            if ($row && $row['Image']) {
+                $result = array("status" => "success", "message" => $row['Image']);
+            } else $result = array("status" => "failed", "message" => "Image not found");
+        } else $result = array("status" => "failed", "message" => "Query failed");
+    } else $result = array("status" => "failed", "message" => "Database connection failed");
+} else $result = array("status" => "failed", "message" => "Username is required!!!");
+
+echo json_encode($result, JSON_PRETTY_PRINT);
+

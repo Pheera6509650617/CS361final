@@ -20,21 +20,12 @@ if(!empty($_POST['username']) && !empty($_POST['gmail']) && !empty($_POST['oldUs
         } else {
             $path = 'images/'.date("d-m-y").'-'.time().'-'.rand(10000, 100000). '.jpg';
             if(file_put_contents($path , base64_decode($_POST['image']))) {
-                //$sqlUpdateImage = "UPDATE users SET Image = '".$path."' WHERE username = '".$oldUsername."' ";
                 $sqlUpdate = "UPDATE users SET username = '".$username."', gmail = '".$gmail."', Image = '".$path."' WHERE username = '".$oldUsername."' ";
                 if(mysqli_query($con, $sqlUpdate)) {
-                    //if(mysqli_query($con, $sqlUpdateImage)) {
                         $result = array("status" => "success", "message"=>"Edit Profile success with IMAGE", 
                             "gmail"=> $gmail, "username"=> $username);
-                    //} else $result = array("status" => "failed", "message" => "UPLOAD IMAGE TO DATABASE FAIL");
                 } else $result = array("status" => "failed", "message" => "Edit Profile failed try again");
             } else $result = array("status" => "failed", "message" => "UPLOAD image FAIL!!!");
-
-            /*$sqlUpdate = "UPDATE users SET username = '".$username."', gmail = '".$gmail."' WHERE username = '".$oldUsername."'";
-            if(mysqli_query($con, $sqlUpdate)) {
-                $result = array("status" => "success", "message"=>"Edit Profile success with IMAGE", 
-                    "gmail"=> $gmail, "username"=> $username);
-            } else $result = array("status" => "failed", "message" => "Edit Profile failed try again");*/
         }
     } else $result = array("status" => "failed", "message" => "Connect to DATABASE fail");
 } else $result = array("status" => "failed", "message" => "All field are required");
