@@ -1,44 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/login_background"
     android:gravity="center"
-    android:background="@drawable/login_background">
+    tools:context=".EditprofilePage">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_box_background"
-        android:gravity="center"
         android:orientation="vertical"
+        android:background="@drawable/login_box_background"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
-        <TextView
+        <ImageView
+            android:id="@+id/EditImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/register"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="36dp"/>
+            android:layout_height="200dp"
+            android:src="@drawable/login_icon"/>
 
         <EditText
-            android:id="@+id/gmailRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/gmail"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="20sp"
-            android:background="@drawable/textbox"
-            android:padding="12dp"
-            android:inputType="text"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
-
-        <EditText
-            android:id="@+id/usernameInput2"
+            android:id="@+id/EditUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username"
@@ -46,54 +32,56 @@
             android:textColorHint="@color/black"
             android:textSize="20sp"
             android:background="@drawable/textbox"
-            android:padding="12dp"
+            android:padding="18dp"
             android:inputType="text"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
 
         <EditText
-            android:id="@+id/passwordInput2"
+            android:id="@+id/EditGmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
+            android:layout_marginTop="16dp"
+            android:hint="@string/gmail"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp"
             android:background="@drawable/textbox"
-            android:padding="12dp"
-            android:inputType="textPassword"
-            android:layout_marginTop="8dp"
+            android:padding="18dp"
+            android:inputType="text"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
 
         <TextView
-            android:id="@+id/warning2"
+            android:id="@+id/warning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/red"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:textSize="15dp"
-            android:textColor="@color/red"/>
+            android:layout_marginTop="20dp"/>
 
         <Button
-            android:id="@+id/RegisterButton"
+            android:id="@+id/uploadButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register"
+            android:text="@string/confirm"
             android:backgroundTint="@color/orange"
             android:textColor="@color/white"
             android:padding="18dp"
             android:textSize="20sp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/cancelButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="@string/cancel"
             android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"/>
+
     </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>

@@ -1,6 +1,5 @@
 package com.example.cs361final;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,7 +37,7 @@ public class RegisterPage extends AppCompatActivity {
         loginBTN = findViewById(R.id.loginButton);
 
         loginBTN.setOnClickListener(view -> {
-            Intent LL = new Intent(RegisterPage.this, MainActivity.class);
+            Intent LL = new Intent(RegisterPage.this, LoginPage.class);
             startActivity(LL);
             finish();
         });
@@ -60,7 +59,7 @@ public class RegisterPage extends AppCompatActivity {
                             public void onResponse(String response) {
                                 if(response.equals("success")) {
                                     Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
-                                    Intent L = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent L = new Intent(getApplicationContext(), LoginPage.class);
                                     startActivity(L);
                                     finish();
                                 } else {

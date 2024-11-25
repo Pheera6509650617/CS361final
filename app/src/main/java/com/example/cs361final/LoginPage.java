@@ -3,18 +3,13 @@ package com.example.cs361final;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,7 +24,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity {
     private EditText uname, pass;
     private Button loginBTN, registerBTN;
     private TextView warn;
@@ -38,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_page);
         uname = findViewById(R.id.usernameInput);
         pass = findViewById(R.id.passwordInput);
         warn = findViewById(R.id.warning);
@@ -47,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("App", MODE_PRIVATE);
 
         if(sharedPreferences.getString("logged", "false").equals("true")) {
-            Intent P = new Intent(getApplicationContext(), ProfilePage.class);
+            Intent P = new Intent(getApplicationContext(), FeedPage.class);
             startActivity(P);
             finish();
         }
 
         registerBTN.setOnClickListener(view -> {
-            Intent R = new Intent(MainActivity.this, RegisterPage.class);
+            Intent R = new Intent(LoginPage.this, RegisterPage.class);
             startActivity(R);
             finish();
         });
@@ -84,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
                                         editor.putString("gmail", gmail);
                                         editor.putString("apiKey", apiKey);
                                         editor.apply();
-                                        Intent P = new Intent(getApplicationContext(), ProfilePage.class);
-                                        startActivity(P);
+                                        Intent F = new Intent(getApplicationContext(), FeedPage.class);
+                                        startActivity(F);
                                         finish();
                                     } else {
-                                        warn.setText(response);
+                                        warn.setText(message);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

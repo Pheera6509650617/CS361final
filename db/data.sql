@@ -4,5 +4,6 @@ create table users (
 	gmail VARCHAR(100) UNIQUE,
 	username VARCHAR(100) UNIQUE,
 	password VARCHAR(100),
-	apiKey VARCHAR(100)
+	apiKey VARCHAR(100),
+	Image TEXT
 );

@@ -1,15 +1,18 @@
 package com.example.cs361final;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,56 +21,65 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfilePage extends AppCompatActivity {
-    private TextView username, gmail;
-    private Button logoutBTN;
-    String uname, pass;
-    SharedPreferences sharedPreferences;
+public class ProfileFragment extends Fragment {
 
-    protected void onCreate(Bundle SaveInstanceState) {
-        super.onCreate(SaveInstanceState);
-        setContentView(R.layout.profile_page);
-        username = findViewById(R.id.username);
-        gmail = findViewById(R.id.gmail);
-        logoutBTN = findViewById(R.id.LogoutButton);
-        sharedPreferences = getSharedPreferences("App", MODE_PRIVATE);
-        if(sharedPreferences.getString("logged", "false").equals("false")) {
-            Intent L = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(L);
-            finish();
-        }
+    TextView username, gmail;
+    Button logoutBTN, editprofileBTN;
+    private SharedPreferences sharedPreferences;
+
+    public ProfileFragment() {
+
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        logoutBTN = view.findViewById(R.id.logoutButton);
+        sharedPreferences = getActivity().getSharedPreferences("App", Context.MODE_PRIVATE);
+        username = view.findViewById(R.id.username);
+        gmail = view.findViewById(R.id.gmail);
+        editprofileBTN = view.findViewById(R.id.editProfileButton);
 
         username.setText(sharedPreferences.getString("username", ""));
         gmail.setText(sharedPreferences.getString("gmail", ""));
 
+        editprofileBTN.setOnClickListener(v -> {
+            Intent EP = new Intent(getActivity(), EditprofilePage.class);
+            startActivity(EP);
+            getActivity().finish();
+        });
+
         logoutBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://10.0.2.2:8080/Logout.php";
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                String url = "http://10.0.2.2:8080/Logout.php";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                if(response.equals("success")) {
+                                if (response.equals("success")) {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("logged", "");
                                     editor.putString("username", "");
                                     editor.putString("gmail", "");
                                     editor.putString("apiKey", "");
                                     editor.apply();
-                                    Intent P = new Intent(getApplicationContext(), MainActivity.class);
+
+                                    Intent P = new Intent(getActivity(), LoginPage.class);
                                     startActivity(P);
-                                    finish();
+                                    getActivity().finish();
                                 } else {
-                                    Toast.makeText(ProfilePage.this, response, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, new Response.ErrorListener() {
@@ -75,8 +87,9 @@ public class ProfilePage extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                     }
-                }){
-                    protected Map<String, String> getParams(){
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
                         Map<String, String> paramV = new HashMap<>();
                         paramV.put("username", sharedPreferences.getString("username", ""));
                         paramV.put("apiKey", sharedPreferences.getString("apiKey", ""));
@@ -86,5 +99,7 @@ public class ProfilePage extends AppCompatActivity {
                 queue.add(stringRequest);
             }
         });
+
+        return view;
     }
 }
