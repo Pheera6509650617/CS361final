@@ -3,7 +3,7 @@ if(isset($_POST['username']) && !empty($_POST['username'])) {
     $host = 'db';
     $user = 'MYSQL_USER';
     $pass = 'MYSQL_PASSWORD';
-    $db = 'LoginRegister';
+    $db = 'FakeFacebook';
 
     $con = new mysqli($host, $user, $pass, $db);
     $username = $_POST['username'];

@@ -6,4 +6,8 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="SquareImageView" parent="">
+
+    </style>
+
 </resources>

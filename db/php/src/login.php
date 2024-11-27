@@ -3,7 +3,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
     $host = 'db';
     $user = 'MYSQL_USER'; // Username ที่ใช้login mysql
     $pass = 'MYSQL_PASSWORD';// Password ที่ใช้login mysql
-    $db = 'LoginRegister';// ชื่อ Database
+    $db = 'FakeFacebook';// ชื่อ Database
 
     $con = new mysqli($host, $user, $pass, $db);
     $username = $_POST['username'];
@@ -23,7 +23,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
                 $sqlUpdate = "UPDATE users SET apiKey = '".$apiKey."' WHERE username = '".$username."'";
                 if(mysqli_query($con, $sqlUpdate)) {
                     $result = array("status" => "success", "message"=>"Login success", 
-                        "gmail"=>$row['gmail'], "username"=>$row['username'], "apiKey"=>$apiKey);
+                        "gmail"=>$row['gmail'], "username"=>$row['username'], "apiKey"=>$apiKey, "id"=>$row['id']);
                 } else $result = array("status" => "failed", "message" => "Login failed try again");
             } else $result = array("status" => "failed", "message" => "Username or Password incorrect");
         } else $result = array("status" => "failed", "message" => "Username or Password incorrect");

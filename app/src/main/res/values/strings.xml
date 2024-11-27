@@ -14,4 +14,5 @@
     <string name="editProfile">Edit Profile</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="context">Context</string>
 </resources>

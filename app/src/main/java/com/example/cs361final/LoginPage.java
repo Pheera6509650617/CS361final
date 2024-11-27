@@ -3,6 +3,7 @@ package com.example.cs361final;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ public class LoginPage extends AppCompatActivity {
     private EditText uname, pass;
     private Button loginBTN, registerBTN;
     private TextView warn;
-    String username, password, apiKey, gmail;
+    String username, password, apiKey, gmail, userId;
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +74,15 @@ public class LoginPage extends AppCompatActivity {
                                         username = jsonObject.getString("username");
                                         gmail = jsonObject.getString("gmail");
                                         apiKey = jsonObject.getString("apiKey");
+                                        userId = jsonObject.getString("id");
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.putString("logged", "true");
                                         editor.putString("username", username);
                                         editor.putString("gmail", gmail);
                                         editor.putString("apiKey", apiKey);
+                                        editor.putString("userId", userId);
                                         editor.apply();
+                                        Log.d("PostFragment", "UserId = " + userId);
                                         Intent F = new Intent(getApplicationContext(), FeedPage.class);
                                         startActivity(F);
                                         finish();

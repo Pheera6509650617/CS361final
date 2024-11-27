@@ -3,7 +3,7 @@ if(!empty($_POST['gmail']) && !empty($_POST['username']) && !empty($_POST['passw
     $host = 'db';
     $user = 'MYSQL_USER'; // Username ที่ใช้login mysql
     $pass = 'MYSQL_PASSWORD';// Password ที่ใช้login mysql
-    $db = 'LoginRegister';// ชื่อ Database
+    $db = 'FakeFacebook';// ชื่อ Database
 
     $con = mysqli_connect($host, $user, $pass, $db);
     $gmail = $_POST['gmail'];
