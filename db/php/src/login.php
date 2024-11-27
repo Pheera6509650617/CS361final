@@ -1,26 +1,26 @@
 <?php
-if(!empty($_POST['username']) && !empty($_POST['password'])) {
+if(!empty($_POST['gmail']) && !empty($_POST['password'])) {
     $host = 'db';
     $user = 'MYSQL_USER'; // Username ที่ใช้login mysql
     $pass = 'MYSQL_PASSWORD';// Password ที่ใช้login mysql
     $db = 'FakeFacebook';// ชื่อ Database
 
     $con = new mysqli($host, $user, $pass, $db);
-    $username = $_POST['username'];
+    $gmail = $_POST['gmail'];
     $password = $_POST['password'];
     $result = array();
     if($con) {
-        $sql = "SELECT * FROM users WHERE username = '".$username."'";
+        $sql = "SELECT * FROM users WHERE gmail = '".$gmail."'";
         $res = mysqli_query($con, $sql);
         if(mysqli_num_rows($res) != 0) {
             $row = mysqli_fetch_assoc($res);
-            if($username == $row['username'] && password_verify($password, $row['password'])) {
+            if($gmail == $row['gmail'] && password_verify($password, $row['password'])) {
                 try {
                     $apiKey = bin2hex(random_bytes(23));
                 } catch(Exception $e) {
                     $apiKey = bin2hex(uniqid($username, true));
                 }
-                $sqlUpdate = "UPDATE users SET apiKey = '".$apiKey."' WHERE username = '".$username."'";
+                $sqlUpdate = "UPDATE users SET apiKey = '".$apiKey."' WHERE gmail = '".$gmail."'";
                 if(mysqli_query($con, $sqlUpdate)) {
                     $result = array("status" => "success", "message"=>"Login success", 
                         "gmail"=>$row['gmail'], "username"=>$row['username'], "apiKey"=>$apiKey, "id"=>$row['id']);

@@ -24,10 +24,10 @@
             android:src="@drawable/login_icon"/>
 
         <EditText
-            android:id="@+id/usernameInput"
+            android:id="@+id/gmailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/username"
+            android:hint="@string/gmail"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp"
@@ -78,7 +78,8 @@
             android:layout_height="wrap_content"
             android:text="@string/register"
             android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"/>
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 
 

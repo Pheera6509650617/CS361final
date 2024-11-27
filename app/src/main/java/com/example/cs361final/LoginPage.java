@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginPage extends AppCompatActivity {
-    private EditText uname, pass;
+    private EditText Gmail, pass;
     private Button loginBTN, registerBTN;
     private TextView warn;
     String username, password, apiKey, gmail, userId;
@@ -35,7 +35,7 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
-        uname = findViewById(R.id.usernameInput);
+        Gmail = findViewById(R.id.gmailInput);
         pass = findViewById(R.id.passwordInput);
         warn = findViewById(R.id.warning);
         loginBTN = findViewById(R.id.loginButton);
@@ -57,7 +57,7 @@ public class LoginPage extends AppCompatActivity {
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = String.valueOf(uname.getText());
+                gmail = String.valueOf(Gmail.getText());
                 password = String.valueOf(pass.getText());
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 String url ="http://10.0.2.2:8080/login.php";
@@ -102,7 +102,7 @@ public class LoginPage extends AppCompatActivity {
                 }){
                     protected Map<String, String> getParams(){
                         Map<String, String> paramV = new HashMap<>();
-                        paramV.put("username", username);
+                        paramV.put("gmail", gmail);
                         paramV.put("password", password);
                         return paramV;
                     }

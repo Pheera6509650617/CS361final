@@ -149,6 +149,8 @@ public class PostFragment extends Fragment {
                         }
                     };
                     queue.add(stringRequest);
+                    bitmap = null;
+                    resetPage();
                 } else {
                     content = String.valueOf(contentInput.getText());
                     String url ="http://10.0.2.2:8080/post.php";
@@ -188,11 +190,17 @@ public class PostFragment extends Fragment {
                         }
                     };
                     queue.add(stringRequest);
+                    resetPage();
                 }
             }
         });
 
         return view;
+    }
+
+    public void resetPage() {
+        contentInput.setText("");
+        editImage.setImageResource(R.drawable.baseline_image_24);
     }
 
     public String getDateTime() {

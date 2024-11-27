@@ -48,7 +48,7 @@ public class EditprofilePage extends AppCompatActivity {
     EditText editUsername, editGmail;
     TextView warn;
     Bitmap bitmap;
-    String username, gmail, oldUsername;
+    String username, gmail, oldUsername, oldGmail;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -63,7 +63,9 @@ public class EditprofilePage extends AppCompatActivity {
         warn = findViewById(R.id.warning);
         sharedPreferences = getSharedPreferences("App", MODE_PRIVATE);
         oldUsername = sharedPreferences.getString("username", "");
+        oldGmail = sharedPreferences.getString("gmail", "");
         Log.d("EditProfilePage", "oldUsername = " + oldUsername);
+        Log.d("EditProfilePage", "oldGmail = " + oldGmail);
 
         cancelBTN.setOnClickListener(view -> {
             Intent C = new Intent(EditprofilePage.this, FeedPage.class);
@@ -100,6 +102,18 @@ public class EditprofilePage extends AppCompatActivity {
         confirmBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                username = String.valueOf(editUsername.getText());
+                if(username.isEmpty()) {
+                    username = oldUsername;
+                }
+                gmail = String.valueOf(editGmail.getText());
+                if(gmail.isEmpty()) {
+                    gmail = oldGmail;
+                }
+
+                Log.d("EditProfilePage", "username = " + username);
+                Log.d("EditProfilePage", "gmail = " + gmail);
+
                 final String base64Image;
                 ByteArrayOutputStream byteArrayOutputStream;
                 byteArrayOutputStream = new ByteArrayOutputStream();
@@ -108,8 +122,6 @@ public class EditprofilePage extends AppCompatActivity {
                     byte[] bytes = byteArrayOutputStream.toByteArray();
                     base64Image = Base64.encodeToString(bytes, Base64.DEFAULT);
 
-                    username = String.valueOf(editUsername.getText());
-                    gmail = String.valueOf(editGmail.getText());
                     RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                     String url ="http://10.0.2.2:8080/editProfile.php";
 
@@ -128,7 +140,7 @@ public class EditprofilePage extends AppCompatActivity {
                                             editor.putString("username", username);
                                             editor.putString("gmail", gmail);
                                             editor.apply();
-                                            Toast.makeText(EditprofilePage.this, message, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(EditprofilePage.this, "Edit profile success!", Toast.LENGTH_SHORT).show();
                                             Log.d("EditprofilePage", "YES BITMAP");
                                             Intent F = new Intent(getApplicationContext(), FeedPage.class);
                                             startActivity(F);
@@ -159,8 +171,6 @@ public class EditprofilePage extends AppCompatActivity {
                     };
                     queue.add(stringRequest);
                 } else {
-                    username = String.valueOf(editUsername.getText());
-                    gmail = String.valueOf(editGmail.getText());
                     RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                     String url ="http://10.0.2.2:8080/editProfile.php";
 
@@ -179,7 +189,7 @@ public class EditprofilePage extends AppCompatActivity {
                                             editor.putString("username", username);
                                             editor.putString("gmail", gmail);
                                             editor.apply();
-                                            Toast.makeText(EditprofilePage.this, message, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(EditprofilePage.this, "Edit profile success!", Toast.LENGTH_SHORT).show();
                                             Log.d("EditprofilePage", "NO BITMAP");
                                             Intent F = new Intent(getApplicationContext(), FeedPage.class);
                                             startActivity(F);

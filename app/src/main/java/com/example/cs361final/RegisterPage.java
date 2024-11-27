@@ -22,10 +22,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterPage extends AppCompatActivity {
-    private EditText gmailT, unameT, passwordT;
+    private EditText gmailT, unameT, passwordT, confirmP;
     private TextView warningT;
     Button registerBTN, loginBTN;
-    String gmail, uname, password;
+    String gmail, uname, password ,CP;
     protected void onCreate(Bundle SaveInstanceState) {
         super.onCreate(SaveInstanceState);
         setContentView(R.layout.register_page);
@@ -35,6 +35,7 @@ public class RegisterPage extends AppCompatActivity {
         passwordT = findViewById(R.id.passwordInput2);
         registerBTN = findViewById(R.id.RegisterButton);
         loginBTN = findViewById(R.id.loginButton);
+        confirmP = findViewById(R.id.confirmPassword);
 
         loginBTN.setOnClickListener(view -> {
             Intent LL = new Intent(RegisterPage.this, LoginPage.class);
@@ -48,40 +49,46 @@ public class RegisterPage extends AppCompatActivity {
                 gmail = String.valueOf(gmailT.getText());
                 uname = String.valueOf(unameT.getText());
                 password = String.valueOf(passwordT.getText());
-                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url ="http://10.0.2.2:8080/register.php";
-                Log.d("RegisterPage", "Gmail: " + gmail + ", Username: " + uname + ", Password: " + password);
-                Log.d("RegisterPage", "Request URL: " + url);
+                CP = String.valueOf(confirmP.getText());
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                if(response.equals("success")) {
-                                    Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
-                                    Intent L = new Intent(getApplicationContext(), LoginPage.class);
-                                    startActivity(L);
-                                    finish();
-                                } else {
-                                    warningT.setText(response);
+                if(!password.equals(CP)) {
+                    warningT.setText(R.string.confirmPass_warn);
+                } else {
+                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                    String url = "http://10.0.2.2:8080/register.php";
+                    Log.d("RegisterPage", "Gmail: " + gmail + ", Username: " + uname + ", Password: " + password);
+                    Log.d("RegisterPage", "Request URL: " + url);
+
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    if (response.equals("success")) {
+                                        Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
+                                        Intent L = new Intent(getApplicationContext(), LoginPage.class);
+                                        startActivity(L);
+                                        finish();
+                                    } else {
+                                        warningT.setText(response);
+                                    }
                                 }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        warningT.setText("Error: " + error.toString());
-                        Toast.makeText(getApplicationContext(), "Request failed: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }){
-                    protected Map<String, String> getParams(){
-                        Map<String, String> paramV = new HashMap<>();
-                        paramV.put("gmail", gmail);
-                        paramV.put("username", uname);
-                        paramV.put("password", password);
-                        return paramV;
-                    }
-                };
-                queue.add(stringRequest);
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            warningT.setText("Error: " + error.toString());
+                            Toast.makeText(getApplicationContext(), "Request failed: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        protected Map<String, String> getParams() {
+                            Map<String, String> paramV = new HashMap<>();
+                            paramV.put("gmail", gmail);
+                            paramV.put("username", uname);
+                            paramV.put("password", password);
+                            return paramV;
+                        }
+                    };
+                    queue.add(stringRequest);
+                }
             }
         });
     }

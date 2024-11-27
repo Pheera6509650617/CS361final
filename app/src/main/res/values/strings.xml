@@ -2,7 +2,6 @@
     <string name="app_name">CS361_final</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="confirmP">Confirm Password</string>
     <string name="gmail">Gmail</string>
     <string name="login">LOGIN</string>
     <string name="register">Register</string>
@@ -15,4 +14,6 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="context">Context</string>
+    <string name="confirmPass">Confirm Password</string>
+    <string name="confirmPass_warn">Password and confirm password must be the same</string>
 </resources>
