@@ -130,7 +130,7 @@ public class ProfileFragment extends Fragment {
                                     .load(fullImageUrl)
                                     .into(Pimage);
                             } else {
-                                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

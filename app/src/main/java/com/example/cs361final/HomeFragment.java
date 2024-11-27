@@ -66,7 +66,6 @@ public class HomeFragment extends Fragment {
                             posts.add(new PostData(username, profileImage, dateTime, content, image));
                         }
 
-                        // Set adapter to ListView
                         ListView listView = view.findViewById(R.id.listFeed);
                         PostAdapter adapter = new PostAdapter(getActivity(), posts);
                         listView.setAdapter(adapter);
