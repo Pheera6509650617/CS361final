@@ -8,4 +8,10 @@
     <color name="red">#FF0000</color>
     <color name="grey">#A09595</color>
     <color name="lavender">#8692F7</color>
+
+    <color name="B5">#3D51A0</color>
+    <color name="B4">#7090E4</color>
+    <color name="B3">#8596C1</color>
+    <color name="B2">#ACB9D8</color>
+    <color name="B1">#ECE6F4</color>
 </resources>
