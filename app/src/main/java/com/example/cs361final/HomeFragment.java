@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
                 response -> {
                     List<PostData> posts = new ArrayList<>();
                     try {
-                        for (int i = 0; i < response.length(); i++) {
+                        for (int i = response.length() - 1; i >= 0; i--) {
                             JSONObject postObj = response.getJSONObject(i);
 
                             String username = postObj.getString("postOwnerUsername");

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/login_background"
+    android:background="@drawable/app_background"
     tools:context=".ProfileFragment">
 
     <LinearLayout
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="@drawable/login_box_background"
+            android:background="@drawable/box_background"
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/login_box_background"
+                android:background="@drawable/textbox"
                 android:padding="10dp"
                 android:text="@string/username"
                 android:textSize="20sp"/>
@@ -51,7 +51,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/login_box_background"
+                android:background="@drawable/textbox"
                 android:padding="10dp"
                 android:text="@string/gmail"
                 android:textSize="20sp"/>
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/editProfile"
-                android:backgroundTint="@color/orange"
+                android:backgroundTint="@color/B5"
                 android:textColor="@color/white"
                 android:padding="18dp"
                 android:textSize="20dp"
