@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
     android:orientation="vertical"
-    tools:context=".HomeFragment">
+    tools:context=".FeedFragment">
 
     <ListView
         android:id="@+id/listFeed"

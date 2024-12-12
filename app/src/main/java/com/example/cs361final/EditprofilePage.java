@@ -25,6 +25,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -69,6 +72,7 @@ public class EditprofilePage extends AppCompatActivity {
 
         cancelBTN.setOnClickListener(view -> {
             Intent C = new Intent(EditprofilePage.this, FeedPage.class);
+            C.putExtra("fragmentToLoad", "ProfileFragment");
             startActivity(C);
             finish();
         });
@@ -143,6 +147,7 @@ public class EditprofilePage extends AppCompatActivity {
                                             Toast.makeText(EditprofilePage.this, "Edit profile success!", Toast.LENGTH_SHORT).show();
                                             Log.d("EditprofilePage", "YES BITMAP");
                                             Intent F = new Intent(getApplicationContext(), FeedPage.class);
+                                            F.putExtra("fragmentToLoad", "ProfileFragment");
                                             startActivity(F);
                                             finish();
                                         } else {
@@ -192,6 +197,7 @@ public class EditprofilePage extends AppCompatActivity {
                                             Toast.makeText(EditprofilePage.this, "Edit profile success!", Toast.LENGTH_SHORT).show();
                                             Log.d("EditprofilePage", "NO BITMAP");
                                             Intent F = new Intent(getApplicationContext(), FeedPage.class);
+                                            F.putExtra("fragmentToLoad", "ProfileFragment");
                                             startActivity(F);
                                             finish();
                                         } else {
@@ -223,3 +229,4 @@ public class EditprofilePage extends AppCompatActivity {
         });
     }
 }
+
